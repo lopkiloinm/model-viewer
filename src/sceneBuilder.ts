@@ -196,10 +196,10 @@ export class SceneBuilder implements ISceneBuilder {
 
                     try {
                         // Call without awaiting
-                        void firebase.countUp("phoshco", fallbackItem!.name.replace(/\./g, "")).catch((error) => {
+                        void firebase.countUp("phoshco", fallbackItem!.name.replace(/\./g, "")).catch((error: unknown) => {
                             console.error("Failed count: ", error);
                         });
-                    } catch (error) {
+                    } catch (error: unknown) {
                         console.error("Unexpected error during count: ", error);
                     }
 
@@ -669,7 +669,7 @@ export class SceneBuilder implements ISceneBuilder {
 
                 try {
                     // Call without awaiting
-                    void firebase.countUp("phoshco", "hoyo").catch((error) => {
+                    void firebase.countUp("phoshco", "hoyo").catch((error: unknown) => {
                         console.error("Failed count: ", error);
                     });
                 } catch (error) {
@@ -4276,7 +4276,7 @@ export class SceneBuilder implements ISceneBuilder {
 
                     try {
                         // Call without awaiting
-                        void firebase.countUp("phoshco", chosenChar.name.replace(/\./g, "")).catch((error) => {
+                        void firebase.countUp("phoshco", chosenChar.name.replace(/\./g, "")).catch((error: unknown) => {
                             console.error("Failed count: ", error);
                         });
                     } catch (error) {
