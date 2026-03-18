@@ -49,6 +49,7 @@
         "@ffmpeg/ffmpeg": "^0.12.15",
         "babylon-mmd": "^1.1.0",
         "firebase": "^11.2.0",
+        "jszip": "^3.10.1",
         "minisearch": "^7.1.1",
         "typescript-eslint": "^8.46.0"
     }
