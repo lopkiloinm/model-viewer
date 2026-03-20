@@ -50,7 +50,8 @@ export class mobileMmdPlayerControl extends MmdPlayerControl {
         this._lastCapturedRuntimeFrame = -1;
         this._progressOverlay = null;
         this._lastFrameChangeTime = 0;
-        this._batchFrameLimit = 100; // ~3.3s at 30fps
+        // capture continuously without mid-run batching to avoid pauses/resets
+        this._batchFrameLimit = Number.POSITIVE_INFINITY;
         this._batchIndex = 0;
         this._stepping = false;
         this._batchFrameCount = 0;
@@ -129,16 +130,7 @@ export class mobileMmdPlayerControl extends MmdPlayerControl {
             return;
         }
 
-        if (this._batchFrameCount >= this._batchFrameLimit) {
-            const finalizeWorker = this._zipWorker;
-            const finalizeUrl = this._zipWorkerUrl;
-            this._zipWorker = null;
-            this._zipWorkerUrl = null;
-            this._ensureZipWorker();
-            const count = this._batchFrameCount;
-            this._batchFrameCount = 0;
-            await this._finalizeCurrentBatch(false, finalizeWorker, finalizeUrl, count);
-        }
+        // batching disabled; all frames captured in a single pass to keep physics continuous
 
         // step next frame asynchronously to keep UI responsive
         setTimeout(() => void this._stepFrameCapture(scene, sourceCanvas), 0);
